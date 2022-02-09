@@ -1,0 +1,8 @@
+Para crear imágenes hay dos caminos:
+
+1. Se puede lanzar un container y luego ir aplicando modificaciones mediante comandos docker.
+
+2. Utilizar un Dockerfile con las instrucciones que la construyen capa a capa.
+
+docker build . con un Dockerfile en el directorio
+
