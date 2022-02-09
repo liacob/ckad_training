@@ -1,0 +1,9 @@
+docker ps
+docker inspect <ID> | less
+docker inspect --format='{{.NetworkSettings.IPAddress}}' containername
+docker inspect --format='{{.State.Pid}}' containername
+ps aux | grep PID obtenido con lo de arriba
+docker run
+docker kill
+docker rm
+

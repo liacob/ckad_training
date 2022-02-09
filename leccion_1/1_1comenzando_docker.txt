@@ -1,0 +1,17 @@
+mkdir -p leccion_1/html
+echo hello from docker >> /repos/ckad_training/leccion_1/html/index.html
+
+- CREAR EL CONTENEDOR
+docker run -d -p 8080:80 --name="myapache" -v /leccion_1/html:/var/html httpd
+
+- VER ESTADO CONTENEDORES
+docker ps
+
+- VER CÓMO ESTÁ EL PUERTO 
+ss -tunap | grep 8080
+
+- COMPROBAR CONTENIDO DEL CONTENEDOR
+curl http://localhost:8080
+
+- CONTENEDOR CON LINUX MINIMALISTA EN MODO INTERACTIVO
+docker run -it busybox
