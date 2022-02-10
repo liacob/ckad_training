@@ -1,0 +1,12 @@
+Los logs se escriben en el container por defecto, por ello toca un volumen para tenerlos en el host.
+
+docker run --rm -v ~/repos/ckad_training/leccion_1/logs:/dev/log fedora:latest logger "message from FEDORA" (El rm para que se borre la imagen al dejar de usarla)
+
+journalctl | grep FED
+
+
+
+------ LAB 1 ------
+
+docker run --name ubuntu_bash --rm -i -t ubuntu bash
+ctl p + ctrl q para salir sin cerrar
