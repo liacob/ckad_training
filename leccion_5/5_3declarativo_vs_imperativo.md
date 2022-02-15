@@ -8,7 +8,8 @@
 
 - Obtener el estado actual de un objeto:
 > kubectl get deployments nginx --export -o yaml
-
+    - Habría que borrar cosas como el status o timestamp
+    
 - Push de la nueva configuración:
 > kubectl replace -f nginx.yaml
 
