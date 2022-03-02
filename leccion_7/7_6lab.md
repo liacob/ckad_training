@@ -1,0 +1,1 @@
+kubectl create deployment proxy --image=nginx:1.9 --replicas=5 -o yaml > leccion_7/lab7.yaml
