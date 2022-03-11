@@ -19,10 +19,11 @@
     - template: contiene la especificación del Pod
 
 ## Comandos
-
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl create deployment httpd-run --image=httpd --replicas=3
 deployment.apps/httpd-run created
-
+```
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get deployments.apps httpd-run  -o yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -59,7 +60,8 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-
+```
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get all
 NAME                             READY   STATUS    RESTARTS   AGE
 pod/httpd-run-7cff6b6b4b-725vt   1/1     Running   0          2m21s
@@ -71,3 +73,4 @@ deployment.apps/httpd-run   3/3     3            3           2m21s
 
 NAME                                   DESIRED   CURRENT   READY   AGE
 replicaset.apps/httpd-run-7cff6b6b4b   3         3         3       2m21s
+```

@@ -22,6 +22,7 @@
 
 ## FORMA MANUAL
 
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl label deployment httpd-run nl=spook
 deployment.apps/httpd-run labeled
 
@@ -29,14 +30,15 @@ deployment.apps/httpd-run labeled
 NAME        READY   UP-TO-DATE   AVAILABLE   AGE    LABELS
 httpd-run   3/3     3            3           106s   app=httpd-run,nl=spook
 
-(base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get deployments.apps **--selector nl=spook**
+(base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get deployments.apps --selector nl=spook
 NAME        READY   UP-TO-DATE   AVAILABLE   AGE
 httpd-run   3/3     3            3           2m43s
+```
 
 ## FORMA AUTOMÁTICA
 
 - Al lanzar un deployment nos da una label por defecto en app=...
-
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get deployments.apps --show-labels 
 NAME         READY   UP-TO-DATE   AVAILABLE   AGE     LABELS
 httpd-run    3/3     3            3           6m20s   **app=httpd-run**,nl=spook
@@ -49,51 +51,33 @@ CreationTimestamp:      Tue, 01 Mar 2022 19:23:24 +0100
 **Labels:                 app=ngingx-run**
 Annotations:            deployment.kubernetes.io/revision: 1
 **Selector:               app=ngingx-run**
-
+```
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get deployments.apps ngingx-run -o yaml 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "1"
-  creationTimestamp: "2022-03-01T18:23:24Z"
-  generation: 1
-  **labels:**
-    **app: ngingx-run**
+  labels:
+    app: ngingx-run
   name: ngingx-run
-  namespace: default
-  resourceVersion: "1235"
-  uid: 892a6eca-8b8b-4dfd-bfe8-5c07feadb145
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
-  **selector:**
+  selector:
     matchLabels:
-      **app: ngingx-run**
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+      app: ngingx-run
   template:
     metadata:
       creationTimestamp: null
-      **labels:**
-        **app: ngingx-run**
-    spec:
-      containers:
-      - image: nginx
-        imagePullPolicy: Always
-        name: nginx
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-
+      labels:
+        app: ngingx-run
+```
 - Quitamos la label automática y al momento se nos crea otro pod porque "ha muerto" el pod con esa label
-
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl label pod ngingx-run-8db74747f-j4h9j app-
-**pod/ngingx-run-8db74747f-j4h9j unlabeled**
+pod/ngingx-run-8db74747f-j4h9j unlabeled
 
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get pods --show-labels 
 NAME                         READY   STATUS    RESTARTS   AGE     LABELS
@@ -101,9 +85,9 @@ httpd-run-7cff6b6b4b-l7sd6   1/1     Running   0          12m     app=httpd-run,
 httpd-run-7cff6b6b4b-sq8qq   1/1     Running   0          12m     app=httpd-run,pod-template-hash=7cff6b6b4b
 httpd-run-7cff6b6b4b-tp9cf   1/1     Running   0          12m     app=httpd-run,pod-template-hash=7cff6b6b4b
 ngingx-run-8db74747f-j4h9j   1/1     Running   0          6m26s   pod-template-hash=8db74747f
-**ngingx-run-8db74747f-sjzgf   1/1     Running   0          13s     app=ngingx-run,pod-template-hash=8db74747f**
+ngingx-run-8db74747f-sjzgf   1/1     Running   0          13s     app=ngingx-run,pod-template-hash=8db74747f
 
-(base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get all **--selector** app=ngingx-run
+(base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get all --selector app=ngingx-run
 NAME                             READY   STATUS    RESTARTS   AGE
 pod/ngingx-run-8db74747f-sjzgf   1/1     Running   0          110s
 
@@ -112,3 +96,4 @@ deployment.apps/ngingx-run   1/1     1            1           8m3s
 
 NAME                                   DESIRED   CURRENT   READY   AGE
 replicaset.apps/ngingx-run-8db74747f   1         1         1       8m3s
+```

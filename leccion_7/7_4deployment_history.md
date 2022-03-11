@@ -9,8 +9,9 @@
 >> kubectl rollout history
 
 ## Comandos
-
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl rollout history deployment ngingx-run 
 deployment.apps/ngingx-run 
 REVISION  CHANGE-CAUSE
 1         <none>
+```

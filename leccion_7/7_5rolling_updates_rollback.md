@@ -18,7 +18,7 @@
     - MaxSurge: Máximo por encima del número de réplicas especificado.
 
 ## Comandos
-
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ cat materials/rolling.yaml 
 apiVersion: apps/v1
 kind: Deployment
@@ -31,16 +31,17 @@ spec:
     **rollingUpdate:**
       **maxSurge: 2**
       **maxUnavailable: 1**
-
+```
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl rollout history deployment rolling-nginx 
 deployment.apps/rolling-nginx 
 REVISION  CHANGE-CAUSE
 1         <none>
 
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl edit deployments.apps rolling-nginx 
-
+```
 - Cambiamos la versión de la imagen a una más moderna
-
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get deployments.apps 
 NAME            READY   UP-TO-DATE   AVAILABLE   AGE
 rolling-nginx   **3/4**     3            3           2m1s
@@ -50,7 +51,8 @@ deployment.apps/rolling-nginx
 REVISION  CHANGE-CAUSE
 1         <none>
 2         <none>
-
+```
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl rollout history deployment rolling-nginx **--revision=2**
 deployment.apps/rolling-nginx with revision #2
 Pod Template:
@@ -77,5 +79,5 @@ deployment.apps/rolling-nginx rolled back
 NAME                       DESIRED   CURRENT   READY   AGE
 rolling-nginx-5d5cc69b9    0         0         0       6m52s
 rolling-nginx-**77875989ff**   4         4         4       8m47s
-
+```
 **VUELVE A LOS PODS ANTERIORES QUE SE CREARON EN LA V1**

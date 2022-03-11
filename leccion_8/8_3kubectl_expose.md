@@ -13,12 +13,13 @@
 >> kubectl get svc (name -o yaml)
 
 # Comandos
-
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl expose deployment proxy --port=80 --type=NodePort
 service/proxy exposed
-
+```
+```
 (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl get svc
 NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        112m
 proxy        NodePort    10.108.103.60   <none>        80:30493/TCP   20s
-
+```
