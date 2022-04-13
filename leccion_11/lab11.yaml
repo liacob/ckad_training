@@ -1,0 +1,32 @@
+# (base) liacob@DESKTOP-9HJ41J9:~/repos/ckad_training$ kubectl create deployment secretservice --image=alpine -o yaml --dry-run 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: secretservice
+  name: secretservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secretservice
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: secretservice
+    spec:
+      containers:
+      - image: alpine
+        name: alpine
+        command: ['sleep','600']
+        volumeMounts:
+        - name: lab11-secreto
+          mountPath: /etc/users
+      volumes:
+      - name: lab11-secreto
+        secret:
+          secretName: lab11-secret
+status: {}
